@@ -1,3 +1,2 @@
 beautifulsoup4==4.9.3
-Requests==2.32.3
-setuptools==52.0.0.post20210125
+requests==2.32.3
