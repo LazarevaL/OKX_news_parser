@@ -23,7 +23,7 @@ class OKXNewsDownloader:
             and store it in the folder.
             """
         url = "https://www.okx.com/ru/help/section/announcements-latest-announcements"
-        response = requests.get(url, timeout=2)
+        response = requests.get(url)
         if response.status_code == 200:
             soup = BeautifulSoup(response.content, 'html.parser')
             news_items = soup.find('script', attrs={"data-id": "app_data_for_ssr"}).get_text()
@@ -32,7 +32,7 @@ class OKXNewsDownloader:
 
             for page in range(1, (pages // 15 + 2)):
                 page_url = f"{url}/page/{page}"
-                response = requests.get(page_url, timeout=2)
+                response = requests.get(page_url)
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.content, 'html.parser')
                     news_items = soup.find('script', attrs={"data-id": "app_data_for_ssr"}).get_text()
@@ -44,7 +44,7 @@ class OKXNewsDownloader:
                 if self.start_date <= news_date <= self.end_date:
                     title = news_item['title']
                     news_url = f"https://www.okx.com/ru/help/{news_item['slug']}"
-                    response = requests.get(news_url, timeout=2)
+                    response = requests.get(news_url)
                     content = BeautifulSoup(response.content, 'html.parser')
                     news_text = content.find('div', class_="index_content__03zP1").get_text()
 
